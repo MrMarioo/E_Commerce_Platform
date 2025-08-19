@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enum\StatuseEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 
 class Brand extends Model
@@ -15,11 +16,16 @@ class Brand extends Model
         'name',
         'image',
         'description',
-        'status'
+        'status',
+        'slug'
     ];
 
     protected $casts = [
         'status' => StatuseEnum::class
     ];
-    
+
+    public function products(): hasMany
+    {
+        return $this->hasMany(Product::class);
+    }
 }

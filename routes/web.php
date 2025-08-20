@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BrandController;
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -17,6 +19,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
        Route::controller(controller: CategoryController::class)->group(function (){
             Route::resource(name: 'category', controller: CategoryController::class);
        });
+    });
+    Route::prefix(prefix: 'brand')->group(function (){
+        Route::controller(controller: BrandController::class)->group(function (){
+            Route::resource(name: 'brand', controller: BrandController::class);
+        });
+    });
+    Route::prefix(prefix: 'product')->group(function (){
+        Route::controller(controller: ProductController::class)->group(function (){
+            Route::resource(name: 'product', controller: ProductController::class);
+        });
+    });
+    Route::prefix(prefix: 'productImage')->group(function (){
+        Route::controller(controller: ProductController::class)->group(function (){
+            Route::resource(name: 'productImage', controller: ProductController::class);
+        });
     });
 });
 

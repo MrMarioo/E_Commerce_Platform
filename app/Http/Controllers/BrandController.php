@@ -2,16 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BrandResource;
+use App\Models\Brand;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class BrandController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): Response
     {
-        //
+        $brand = QueryBuilder::for(subject: Brand::class)
+            ->allowedFilters(filters: ['id', 'name', 'slug'])
+            ->allowedSorts(sorts: ['id', 'name', 'slug', 'created_at'])
+            ->defaultSort(sorts: ['name'])
+            ->paginate(perPage: $request->input('per_page', 10), page: $request->input('page', 1) + 1);
+
+        return Inertia::render('Brands/Index', [
+            'brands' => BrandResource::collection(resource: $brand),
+        ]);
     }
 
     /**

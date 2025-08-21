@@ -7,17 +7,26 @@ use App\Models\Product;
 use App\Models\ProductsImage;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ProductsImageController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): AnonymousResourceCollection
     {
-        //
+        $images = QueryBuilder::for(subject: ProductsImage::class)
+            ->allowedFilters(filters: ['product_id'])
+            ->allowedIncludes(includes: ['product'])
+            ->allowedSorts(sorts: ['sort_order', 'created_at'])
+            ->defaultSort(sorts: ['sort_order'])
+            ->paginate(perPage: $request->input('per_page', 10), page: $request->input('page', 1) + 1);
+
+        return ProductImageResource::collection(resource: $images);
     }
 
     /**

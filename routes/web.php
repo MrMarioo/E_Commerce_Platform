@@ -4,6 +4,7 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ProductsImageController ;
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -31,8 +32,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
     });
     Route::prefix(prefix: 'productImage')->group(function (){
-        Route::controller(controller: ProductController::class)->group(function (){
-            Route::resource(name: 'productImage', controller: ProductController::class);
+        Route::controller(controller: ProductsImageController::class)->group(function (){
+            Route::resource(name: 'products-images', controller: ProductsImageController::class);
         });
     });
 });

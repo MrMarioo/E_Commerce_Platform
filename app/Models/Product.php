@@ -4,9 +4,11 @@ namespace App\Models;
 
 use App\Enum\StatuseEnum;
 use App\Http\Resources\ProductImageResource;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * @property int $id
@@ -26,7 +28,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Product extends Model
 {
+    use HasFactory, Notifiable;
     protected $fillable = [
+        'id',
         'name',
         'sku',
         'description',

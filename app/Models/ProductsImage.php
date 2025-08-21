@@ -20,9 +20,11 @@ class ProductsImage extends Model {
 
     use HasFactory, Notifiable;
     protected $fillable = [
+        'id',
         'image_path',
         'alt_text',
         'product_id',
+        'sort_order',
     ];
     protected $appends = ['url'];
     public function product(): BelongsTo

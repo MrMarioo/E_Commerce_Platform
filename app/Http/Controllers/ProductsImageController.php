@@ -42,7 +42,7 @@ class ProductsImageController extends Controller
 
         $uploadedImages = [];
 
-        foreach ($request->file(key: 'image') as $item) {
+        foreach ($request->file(key: 'images') as $item) {
                 $image_name = Str::uuid().'.'.$item->getClientOriginalExtension();
                 $image_path = $item->storeAs(path: 'public/products/{$product->id}/{$image_name}', name: $image_name);
 
@@ -51,7 +51,7 @@ class ProductsImageController extends Controller
                 $maxSortOrder = ProductsImage::where('product_id', $product->id)->max('sort_order');
 
                 $productImage = ProductsImage::create([
-                    'product_id' => $request->id,
+                    'product_id' => $product->id,
                     'image_path' => $image_path,
                     'alt_text' => $request->alt_text[$item->getClientOriginalName()] ?? null,
                     'name' => $image_name,

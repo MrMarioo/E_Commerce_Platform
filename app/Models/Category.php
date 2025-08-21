@@ -2,9 +2,19 @@
 
 namespace App\Models;
 
+use App\Enum\StatuseEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property string $description
+ * @property StatuseEnum $status
+ * @property integer $sort_order
+ * @property integer $parent_id
+ */
 class Category extends Model
 {
     protected $fillable = [

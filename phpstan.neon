@@ -1,3 +1,5 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
 parameters:
 
     paths:
@@ -9,5 +11,8 @@ parameters:
 #    ignoreErrors:
 #        - '#PHPDoc tag @var#'
 #
-#    excludePaths:
-#        - ./*/*/FileToBeExcluded.php
+    excludePaths:
+            - tests/
+            - vendor/
+            - storage/
+            - bootstrap/cache/

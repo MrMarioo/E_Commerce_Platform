@@ -2,10 +2,28 @@
 
 namespace App\Models;
 
+use App\Enum\StatuseEnum;
+use App\Http\Resources\ProductImageResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $description
+ * @property float $price
+ * @property integer $stock_quantity
+ * @property float $weight
+ * @property array $attributes
+ * @property StatuseEnum $status
+ * @property string $sku
+ * @property ProductImageResource|null $image
+ * @property string $image_path
+ * @property string $alt_text
+ * @property int $product_id
+ * @property string $url
+ */
 class Product extends Model
 {
     protected $fillable = [
@@ -23,6 +41,9 @@ class Product extends Model
         'attributes' => 'array',
         'status' => \App\Enum\StatuseEnum::class,
         'image' => ProductsImage::class,
+        'price' => 'float',
+        'stock_quantity' => 'integer',
+        'weight' => 'float',
     ];
     public function user(): BelongsTo
     {

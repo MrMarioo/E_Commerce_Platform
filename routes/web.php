@@ -15,7 +15,8 @@ Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+
+Route::middleware(['auth'])->group(function () {
     Route::prefix(prefix: 'category')->group(function (){
        Route::controller(controller: CategoryController::class)->group(function (){
             Route::resource(name: 'category', controller: CategoryController::class);
